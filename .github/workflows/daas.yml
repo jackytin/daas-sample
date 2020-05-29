@@ -35,6 +35,7 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: generate code
       run: |
+        curl http://t420.doublechaintech.cn:2080/upload/
         ./daas-client/gencode.sh ./models/model.xml .
 
     - name: build backend
