@@ -36,5 +36,12 @@ jobs:
     - name: generate code
       run: |
         cd daas-client
-        ls -l
         ./gencode.sh ../daas-sample/model.xml
+        pwd
+
+    - name: build backend
+      run: |
+      pwd
+      cd bizcore
+      ./gradlew classes
+      pwd
