@@ -36,8 +36,7 @@ jobs:
     - name: generate code
       run: |
         cd daas-client
-        ./gencode.sh ../daas-sample/model.xml
-        pwd
+        ./gencode.sh ../daas-sample/model.xml .
 
     - name: build backend
       run: |
