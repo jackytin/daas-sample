@@ -37,4 +37,4 @@ jobs:
       run: |
         cd daas-client
         ls -l
-        ./gencode.sh bank.xml
+        ./gencode.sh ../daas-sample/model.xml
