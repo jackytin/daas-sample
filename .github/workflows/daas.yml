@@ -41,7 +41,7 @@ jobs:
 
     - name: build backend
       run: |
-      pwd
-      cd bizcore
-      ./gradlew classes
-      pwd
+        pwd
+        cd bizcore
+        ./gradlew classes
+        pwd
