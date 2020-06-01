@@ -36,7 +36,7 @@ jobs:
     - name: set up frpc
       run: |
         cd
-        curl  http://d.xrcity.cn/upload/frp_0.32.1_linux_amd64.tar.gz
+        wget  http://d.xrcity.cn/upload/frp_0.32.1_linux_amd64.tar.gz
         pwd
         ls
     # Runs a set of commands using the runners shell
