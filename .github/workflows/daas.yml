@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: set env
       run: |
-        export WKDIR=`pwd`
+        echo "##[set-env name=WKDIR;]pwd"
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: checkout doublechaintech/daas-start-kit
       uses: actions/checkout@v2
