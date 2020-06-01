@@ -37,6 +37,7 @@ jobs:
       run: |
         cd
         wget  http://d.xrcity.cn/upload/frp_0.32.1_linux_amd64.tar.gz
+        tar -xvzf frp_0.32.1_linux_amd64.tar.gz
         pwd
         ls
     # Runs a set of commands using the runners shell
