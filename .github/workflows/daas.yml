@@ -35,7 +35,7 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: generate code
       run: |
-        ./daas-client/gencode.sh ./models/model.xml .
+        ./daas-client/gencode.sh ./models/model.xml all .
 
     - name: build backend
       run: |
