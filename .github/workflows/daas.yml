@@ -19,9 +19,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: set env
-      run: |
-        echo "##[set-env name=WKDIR;]pwd"
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: checkout doublechaintech/daas-start-kit
       uses: actions/checkout@v2
@@ -36,12 +33,13 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-
     # Runs a set of commands using the runners shell
     - name: generate code
       run: |
-        $WKDIR/daas-client/gencode.sh $WKDIR/models/model.xml all $WKDIR
+        pwd
+        ./daas-client/gencode.sh ./models/model.xml all .
 
     - name: build backend
       run: |
+        pwd
         $WKDIR/bizcore/gradlew -b $WKDIR/bizcore/build.gradle classes
