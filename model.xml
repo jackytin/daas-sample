@@ -7,9 +7,8 @@
     <platform
         name="银行模拟平台|银行模拟平台"
         founded="now()"
-        _features="custom"
         contact_number="992887654321"
-
     />
-  
+
+    <product name="产品" platform="platform()"/>
 </root>
