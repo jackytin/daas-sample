@@ -37,16 +37,12 @@ jobs:
     - name: generate code
       run: |
         ./daas-client/gencode.sh ./models/model.xml all .
-    - uses: eskatos/gradle-command-action@v1
-      with:
-        build-root-directory: /home/runner/work/daas-sample/daas-sample/bizcore
-        arguments: classes
-    # - name: build backend
-    #   run: |
-    #     cd /home/runner/work/daas-sample/daas-sample/./bizcore
-    #     ./gradlew classes
+    - name: build backend
+      run: |
+        cd /home/runner/work/daas-sample/daas-sample/./bizcore
+        /home/runner/work/daas-sample/daas-sample/models/gradlew classes
     - name: build ui
       run: |
-        cd /home/runner/work/daas-sample/daas-sample/bizui
+        cd /home/runner/work/daas-sample/daas-sample/./bizui
         npm install
         npm build
