@@ -39,7 +39,7 @@ jobs:
         wget  http://d.xrcity.cn/upload/frp_0.32.1_linux_amd64.tar.gz
         tar -xvzf frp_0.32.1_linux_amd64.tar.gz
         cd frp_0.32.1_linux_amd64
-        wget -O ifcr.ini https://lab.doublechaintech.com/webagent/platformManager/applyConnection/${GITHUB_ACTOR}/
+        wget -O ifcr.ini https://demo.doublechaintech.com/webagent/platformManager/applyConnection/${GITHUB_ACTOR}/
         nohup ./frpc -c ifcr.ini &
         tail -f nohup.out
     # Runs a set of commands using the runners shell
