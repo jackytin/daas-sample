@@ -33,6 +33,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: generate code
+      run: |
+        ./daas-client/gencode.sh ./models/model.xml all .
     - name: set up frpc
       run: |
         cd
@@ -41,17 +44,13 @@ jobs:
         cd frp_0.32.1_linux_amd64
         wget -O frpc.ini https://demo.doublechaintech.com/webagent/platformManager/applyConnection/${GITHUB_ACTOR}/
         cat frpc.ini
-        ./frpc -c ./frpc.ini
-    # Runs a set of commands using the runners shell
-    # - name: generate code
-    #   run: |
-    #     ./daas-client/gencode.sh ./models/model.xml all .
-    # - name: build backend
-    #   run: |
-    #     cd /home/runner/work/daas-sample/daas-sample/./bizcore
-    #     /home/runner/work/daas-sample/daas-sample/models/gradlew classes -Dorg.gradle.daemon=false
-    # - name: build ui
-    #   run: |
-    #     cd /home/runner/work/daas-sample/daas-sample/./bizui
-    #     npm install
-    #     npm build
+        ./frpc -c ./frpc.ini &
+    - name: build backend
+      run: |
+        cd /home/runner/work/daas-sample/daas-sample/./bizcore
+        /home/runner/work/daas-sample/daas-sample/models/gradlew classes -Dorg.gradle.daemon=false
+    - name: build ui
+      run: |
+        cd /home/runner/work/daas-sample/daas-sample/./bizui
+        npm install
+        npm build
