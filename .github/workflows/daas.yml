@@ -19,8 +19,17 @@ jobs:
           - 6379:6379
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: set up frpc
+      run: |
+        cd
+        wget  http://d.xrcity.cn/upload/frp_0.32.1_linux_amd64.tar.gz
+        tar -xvzf frp_0.32.1_linux_amd64.tar.gz
+        cd frp_0.32.1_linux_amd64
+        wget -O frpc.ini https://demo.doublechaintech.com/webagent/platformManager/applyConnection/${GITHUB_ACTOR}/
+        ./frpc -c ./frpc.ini &
     - name: set up mysql
       run: |
+        cd
         echo "[mysqld]" > my.cnf
         echo "character-set-client-handshake = FALSE" >> my.cnf
         echo "character-set-server = utf8mb4" >> my.cnf
@@ -34,6 +43,11 @@ jobs:
     - name: set up mysql client
       run: |
         sudo apt-get install -y mysql-client
+    - name: set up resin
+      run: |
+        cd
+        wget http://d.xrcity.cn/upload/java/resin-3.1.16.zip
+        unzip resin-3.1.16.zip
     - name: checkout doublechaintech/daas-start-kit
       uses: actions/checkout@v2
       with:
@@ -53,9 +67,13 @@ jobs:
     - name: start backend
       run: |
         cd /home/runner/work/daas-sample/daas-sample/./bizcore
-        gradle bootRun
+        gradle classes
+        gradle copyJar
+        ln -s /home/runner/work/daas-sample/daas-sample/bizcore /home/runner/resin-3.1.16/webapps
+        /home/runner/resin-3.1.16/bin/httpd.sh restart
     - name: build ui
       run: |
         cd /home/runner/work/daas-sample/daas-sample/./bizui
         npm install
         npm build
+        cp -rf dist/* /home/runner/resin-3.1.16/webapps/ROOT
