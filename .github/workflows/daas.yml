@@ -30,7 +30,7 @@ jobs:
         # sudo apt-get install -y gradle
         # gradle -version
         # java -version
-        mysql -V
+        mysql -uroot -p0254891276 -h127.0.0.1
     # - name: set up mysql client
     #   run: |
     #     sudo apt-get install -y mysql-client
