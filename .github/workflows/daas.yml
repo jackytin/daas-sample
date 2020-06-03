@@ -30,31 +30,32 @@ jobs:
         sudo apt-get install -y gradle
         gradle -version
         java -version
-    - name: set up mysql client
-      run: |
-        sudo apt-get install -y mysql-client
-    - name: checkout doublechaintech/daas-start-kit
-      uses: actions/checkout@v2
-      with:
-        repository: doublechaintech/daas-start-kit
-        path: daas-client
-    - name: checkout model repo
-      uses: actions/checkout@v2
-      with:
-        path: models
-    - name: generate code
-      run: |
-        ./daas-client/gencode.sh ./models/model.xml all .
-    - name: create tables and import sample data
-      run: |
-        cd /home/runner/work/daas-sample/daas-sample/./bizcore/WEB-INF/model_core_src/META-INF/
-        mysql -uroot -p0254891276 -h127.0.0.1 < model_mysql.sql
-    - name: start backend
-      run: |
-        cd /home/runner/work/daas-sample/daas-sample/./bizcore
-        gradle bootRun
-    - name: build ui
-      run: |
-        cd /home/runner/work/daas-sample/daas-sample/./bizui
-        npm install
-        npm build
+        mysql
+    # - name: set up mysql client
+    #   run: |
+    #     sudo apt-get install -y mysql-client
+    # - name: checkout doublechaintech/daas-start-kit
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: doublechaintech/daas-start-kit
+    #     path: daas-client
+    # - name: checkout model repo
+    #   uses: actions/checkout@v2
+    #   with:
+    #     path: models
+    # - name: generate code
+    #   run: |
+    #     ./daas-client/gencode.sh ./models/model.xml all .
+    # - name: create tables and import sample data
+    #   run: |
+    #     cd /home/runner/work/daas-sample/daas-sample/./bizcore/WEB-INF/model_core_src/META-INF/
+    #     mysql -uroot -p0254891276 -h127.0.0.1 < model_mysql.sql
+    # - name: start backend
+    #   run: |
+    #     cd /home/runner/work/daas-sample/daas-sample/./bizcore
+    #     gradle bootRun
+    # - name: build ui
+    #   run: |
+    #     cd /home/runner/work/daas-sample/daas-sample/./bizui
+    #     npm install
+    #     npm build
