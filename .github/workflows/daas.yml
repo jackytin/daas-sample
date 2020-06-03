@@ -17,45 +17,45 @@ jobs:
         image: redis
         ports:
           - 6379:6379
-      mysql:
-        image: mysql
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: 0254891276
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: set up mysql
+      run: |
+        echo "[mysqld]" > my.cnf
+        echo "character-set-client-handshake = FALSE" >> my.cnf
+        echo "character-set-server = utf8mb4" >> my.cnf
+        echo "collation-server = utf8mb4_unicode_ci" >> my.cnf
+        echo "default-time-zone =+08:00" >> my.cnf
+        echo "skip-name-resolve" >> my.cnf
+        sudo docker run --rm --name=mysql -v ./my.cnf:/etc/my.cnf -p 3306:3306 -e MYSQL_ROOT_PASSWORD=0254891276 -d mysql:5.7
     - name: set up java & gradle
       run: |
-        # sudo apt-get install -y gradle
-        # gradle -version
-        # java -version
-        mysql -uroot -p0254891276 -h127.0.0.1
-    # - name: set up mysql client
-    #   run: |
-    #     sudo apt-get install -y mysql-client
-    # - name: checkout doublechaintech/daas-start-kit
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: doublechaintech/daas-start-kit
-    #     path: daas-client
-    # - name: checkout model repo
-    #   uses: actions/checkout@v2
-    #   with:
-    #     path: models
-    # - name: generate code
-    #   run: |
-    #     ./daas-client/gencode.sh ./models/model.xml all .
-    # - name: create tables and import sample data
-    #   run: |
-    #     cd /home/runner/work/daas-sample/daas-sample/./bizcore/WEB-INF/model_core_src/META-INF/
-    #     mysql -uroot -p0254891276 -h127.0.0.1 < model_mysql.sql
-    # - name: start backend
-    #   run: |
-    #     cd /home/runner/work/daas-sample/daas-sample/./bizcore
-    #     gradle bootRun
-    # - name: build ui
-    #   run: |
-    #     cd /home/runner/work/daas-sample/daas-sample/./bizui
-    #     npm install
-    #     npm build
+        sudo apt-get install -y gradle
+    - name: set up mysql client
+      run: |
+        sudo apt-get install -y mysql-client
+    - name: checkout doublechaintech/daas-start-kit
+      uses: actions/checkout@v2
+      with:
+        repository: doublechaintech/daas-start-kit
+        path: daas-client
+    - name: checkout model repo
+      uses: actions/checkout@v2
+      with:
+        path: models
+    - name: generate code
+      run: |
+        ./daas-client/gencode.sh ./models/model.xml all .
+    - name: create tables and import sample data
+      run: |
+        cd /home/runner/work/daas-sample/daas-sample/./bizcore/WEB-INF/model_core_src/META-INF/
+        mysql -uroot -p0254891276 -h127.0.0.1 < model_mysql.sql
+    - name: start backend
+      run: |
+        cd /home/runner/work/daas-sample/daas-sample/./bizcore
+        gradle bootRun
+    - name: build ui
+      run: |
+        cd /home/runner/work/daas-sample/daas-sample/./bizui
+        npm install
+        npm build
