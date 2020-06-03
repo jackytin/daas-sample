@@ -74,5 +74,5 @@ jobs:
     - name: build ui
       run: |
         cd /home/runner/work/daas-sample/daas-sample/./bizui
-        npm install && npm build && cp -R dist/* /home/runner/resin-3.1.16/webapps/ROOT
+        npm install && npm run build && cp -R dist/* /home/runner/resin-3.1.16/webapps/ROOT
         sleep 1000
