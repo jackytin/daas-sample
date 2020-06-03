@@ -75,4 +75,13 @@ jobs:
       run: |
         cd /home/runner/work/daas-sample/daas-sample/./bizui
         npm install && npm run build && cp -R dist/* /home/runner/resin-3.1.16/webapps/ROOT
+        cd /home/runner/resin-3.1.16/webapps/ROOT/WEB-INF
+        cat > web.xml <<_EOF_
+          <web-app xmlns="http://caucho.com/ns/resin">
+          <filter filter-name="gzip"
+          filter-class="com.caucho.filters.GzipFilter"/>
+          <filter-mapping url-pattern="/*" filter-name="gzip"/>
+          </web-app>
+        _EOF_
+        /home/runner/resin-3.1.16/bin/httpd.sh restart
         tail -f /home/runner/resin-3.1.16/log/jvm-default.log
