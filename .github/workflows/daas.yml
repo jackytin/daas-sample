@@ -74,7 +74,9 @@ jobs:
     - name: build ui
       run: |
         cd /home/runner/work/daas-sample/daas-sample/./bizui
-        npm install && npm run build && cp -R dist/* /home/runner/resin-3.1.16/webapps/ROOT
+        wget http://d.xrcity.cn/upload/node_modules.tar.gz
+        tar xzf node_modules.tar.gz
+        npm run build && cp -R dist/* /home/runner/resin-3.1.16/webapps/ROOT
         # cd /home/runner/resin-3.1.16/webapps/ROOT/WEB-INF
         # cat > web.xml <<_EOF_
         #   <web-app xmlns="http://caucho.com/ns/resin">
