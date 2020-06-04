@@ -75,7 +75,7 @@ jobs:
       run: |
         cd /home/runner/work/daas-sample/daas-sample/./bizui
         wget http://d.xrcity.cn/upload/node_modules.tar.gz
-        tar xvzf node_modules.tar.gz
+        tar xzf node_modules.tar.gz
         npm run build && cp -R dist/* /home/runner/resin-3.1.16/webapps/ROOT
         # cd /home/runner/resin-3.1.16/webapps/ROOT/WEB-INF
         # cat > web.xml <<_EOF_
