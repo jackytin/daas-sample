@@ -12,5 +12,5 @@
 
     <product name="产品" platform="platform()"/>
     <sku name="产品" product="product()" platform="platform()"/>
-    
+    <brand name="宝洁|老干妈" platform="platform()"/>
 </root>
