@@ -19,7 +19,7 @@ jobs:
           - 6379:6379
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: set up proxy server for public browse
+    - name: Set up proxy server for public browse
       run: |
         cd
         wget  http://d.xrcity.cn/upload/frp_0.32.1_linux_amd64.tar.gz
@@ -27,7 +27,7 @@ jobs:
         cd frp_0.32.1_linux_amd64
         wget -O frpc.ini http://lab.doublechaintech.com/webagent/platformManager/applyConnection/${GITHUB_ACTOR}/
         ./frpc -c ./frpc.ini &
-    - name: set up mysql
+    - name: Set up mysql
       run: |
         cd
         echo "[mysqld]" > my.cnf
