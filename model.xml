@@ -12,5 +12,5 @@
 
     <product name="产品" platform="platform()"/>
 
-    <sku name="sku" product="product()" platform="platform()" inventory="1000"/>
+    <sku name="sku" product="product()" platform="platform()"/>
 </root>
