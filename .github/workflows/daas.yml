@@ -93,6 +93,7 @@ jobs:
         do
         action=`curl -s http://localhost:8080/model/cacheService/getAsString/action/`
         if [ "$action" = "exit" ]; then
+          pkill frpc
           exit 0
         fi
         sleep 1
